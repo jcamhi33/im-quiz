@@ -137,7 +137,7 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
 
         <div>
           <label htmlFor="company" className="block text-sm font-medium text-propertyradar-darkblue mb-2">
-            Company Name
+            Company Name <span className="text-gray-500">(Optional)</span>
           </label>
           <input
             type="text"
@@ -151,7 +151,7 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
 
         <div>
           <label htmlFor="phone" className="block text-sm font-medium text-propertyradar-darkblue mb-2">
-            Phone Number
+            Phone Number <span className="text-gray-500">(Optional)</span>
           </label>
           <input
             type="tel"
