@@ -18,4 +18,5 @@ export interface LeadData {
   email: string
   company?: string
   phone?: string
+  industry: string
 }

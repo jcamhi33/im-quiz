@@ -18,36 +18,38 @@ export default function QuizQuestion({
   totalQuestions
 }: QuizQuestionProps) {
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-sm text-gray-500">
+    <div className="max-w-3xl mx-auto p-8 bg-white rounded-propertyradar shadow-xl border border-propertyradar-200">
+      <div className="mb-8">
+        <div className="flex justify-between items-center mb-6">
+          <span className="text-sm font-medium text-propertyradar-600">
             Question {currentQuestionIndex + 1} of {totalQuestions}
           </span>
-          <div className="w-32 bg-gray-200 rounded-full h-2">
+          <div className="w-40 bg-propertyradar-100 rounded-full h-3">
             <div 
-              className="bg-primary-500 h-2 rounded-full transition-all duration-300"
+              className="bg-gradient-to-r from-propertyradar-blue to-propertyradar-lightblue h-3 rounded-full transition-all duration-500 ease-out"
               style={{ width: `${((currentQuestionIndex + 1) / totalQuestions) * 100}%` }}
             />
           </div>
         </div>
-        <h2 className="text-xl font-semibold text-gray-800 mb-6">
+        <h2 className="text-2xl font-bold text-propertyradar-darkblue mb-2 leading-tight">
           {question.question}
         </h2>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         {question.options.map((option, index) => (
           <button
             key={index}
             onClick={() => onAnswerSelect(index)}
-            className={`w-full p-4 text-left rounded-lg border-2 transition-all duration-200 ${
+            className={`w-full p-5 text-left rounded-propertyradar border-2 transition-all duration-300 font-medium ${
               selectedAnswer === index
-                ? 'border-primary-500 bg-primary-50 text-primary-700'
-                : 'border-gray-200 hover:border-primary-300 hover:bg-gray-50'
+                ? 'border-propertyradar-blue bg-gradient-to-r from-propertyradar-50 to-propertyradar-100 text-propertyradar-darkblue shadow-lg transform scale-[1.02]'
+                : 'border-propertyradar-200 hover:border-propertyradar-lightblue hover:bg-propertyradar-50 hover:shadow-md'
             }`}
           >
-            <span className="font-medium">{String.fromCharCode(65 + index)}.</span>{' '}
+            <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-propertyradar-blue text-white text-sm font-bold mr-4">
+              {String.fromCharCode(65 + index)}
+            </span>
             {option}
           </button>
         ))}
