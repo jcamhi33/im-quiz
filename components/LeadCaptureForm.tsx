@@ -13,17 +13,18 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
     name: '',
     email: '',
     company: '',
-    phone: ''
+    phone: '',
+    industry: ''
   })
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    if (formData.name && formData.email) {
+    if (formData.name && formData.email && formData.industry) {
       onSubmit(formData)
     }
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
@@ -31,22 +32,22 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
   }
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div className="text-center mb-6">
-        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          <svg className="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="max-w-lg mx-auto p-8 bg-white rounded-propertyradar shadow-xl border border-propertyradar-200">
+      <div className="text-center mb-8">
+        <div className="w-20 h-20 bg-gradient-to-r from-propertyradar-blue to-propertyradar-lightblue rounded-full flex items-center justify-center mx-auto mb-6">
+          <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
           </svg>
         </div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Congratulations!</h2>
-        <p className="text-gray-600 mb-4">
-          You scored {score}% and qualified for $50 in free PropertyRadar direct mail credits!
+        <h2 className="text-3xl font-bold text-propertyradar-darkblue mb-3">Congratulations!</h2>
+        <p className="text-propertyradar-600 mb-6 text-lg">
+          You scored <span className="font-bold text-propertyradar-blue">{score}%</span> and qualified for <span className="font-bold text-propertyradar-blue">$50</span> in free PropertyRadar direct mail credits!
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-sm font-medium text-propertyradar-darkblue mb-2">
             Full Name *
           </label>
           <input
@@ -56,12 +57,12 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
             required
             value={formData.name}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-4 py-3 border-2 border-propertyradar-200 rounded-propertyradar focus:outline-none focus:border-propertyradar-blue transition-colors"
           />
         </div>
 
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="email" className="block text-sm font-medium text-propertyradar-darkblue mb-2">
             Email Address *
           </label>
           <input
@@ -71,12 +72,33 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
             required
             value={formData.email}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-4 py-3 border-2 border-propertyradar-200 rounded-propertyradar focus:outline-none focus:border-propertyradar-blue transition-colors"
           />
         </div>
 
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="industry" className="block text-sm font-medium text-propertyradar-darkblue mb-2">
+            Industry *
+          </label>
+          <select
+            id="industry"
+            name="industry"
+            required
+            value={formData.industry}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 border-2 border-propertyradar-200 rounded-propertyradar focus:outline-none focus:border-propertyradar-blue transition-colors bg-white"
+          >
+            <option value="">Select your industry</option>
+            <option value="Real Estate Agent">Real Estate Agent</option>
+            <option value="Real Estate Investor">Real Estate Investor</option>
+            <option value="Home + Property Services">Home + Property Services</option>
+            <option value="Mortgage">Mortgage</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label htmlFor="company" className="block text-sm font-medium text-propertyradar-darkblue mb-2">
             Company Name
           </label>
           <input
@@ -85,12 +107,12 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
             name="company"
             value={formData.company}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-4 py-3 border-2 border-propertyradar-200 rounded-propertyradar focus:outline-none focus:border-propertyradar-blue transition-colors"
           />
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="phone" className="block text-sm font-medium text-propertyradar-darkblue mb-2">
             Phone Number
           </label>
           <input
@@ -99,16 +121,16 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
             name="phone"
             value={formData.phone}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+            className="w-full px-4 py-3 border-2 border-propertyradar-200 rounded-propertyradar focus:outline-none focus:border-propertyradar-blue transition-colors"
           />
         </div>
 
         <button
           type="submit"
-          disabled={!formData.name || !formData.email}
-          className="w-full bg-primary-600 text-white py-2 px-4 rounded-md hover:bg-primary-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+          disabled={!formData.name || !formData.email || !formData.industry}
+          className="w-full bg-gradient-to-r from-propertyradar-blue to-propertyradar-lightblue text-white py-4 px-6 rounded-propertyradar font-bold text-lg hover:from-propertyradar-darkblue hover:to-propertyradar-blue disabled:bg-gray-400 disabled:cursor-not-allowed transition-all duration-300 shadow-lg hover:shadow-xl"
         >
-          Claim Your $50 Credit
+          Claim Your $50 PropertyRadar Credit
         </button>
       </form>
     </div>
