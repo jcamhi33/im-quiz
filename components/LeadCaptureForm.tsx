@@ -17,9 +17,33 @@ export default function LeadCaptureForm({ onSubmit, score }: LeadCaptureFormProp
     industry: ''
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (formData.name && formData.email && formData.industry) {
+      try {
+        // Submit to HubSpot
+        const hubspotResponse = await fetch('/api/hubspot-submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            ...formData,
+            quiz_score: score,
+            lead_source: 'Hyperlocal Marketing Quiz'
+          }),
+        })
+
+        if (hubspotResponse.ok) {
+          console.log('Lead submitted to HubSpot successfully')
+        } else {
+          console.error('Failed to submit to HubSpot')
+        }
+      } catch (error) {
+        console.error('Error submitting to HubSpot:', error)
+      }
+      
+      // Continue with existing flow
       onSubmit(formData)
     }
   }
